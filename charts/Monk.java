@@ -2,18 +2,15 @@ package charts;
 import java.util.List;
 
 public class Monk extends Unit{
-
-    private boolean magic; 
-
     public Monk(List<Unit> gang, int x, int y) {
-        super(12, 7, new int[] {-4, -4}, 30, 5, "Stand");
-        magic = true;
+        super(12, 7, 0, new int[] {-4, -4}, 30, 5, false, true, "Monk");
         super.gang = gang;
-    }
+        super.position = new Vector2(x, y);
+        }
 
     @Override 
     public String getInfo() {
-        return "Monk " + super.getInfo() + ", Magic, " + state;
+        return "Monk " + super.getInfo();
     }
 
     @Override
