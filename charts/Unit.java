@@ -20,9 +20,10 @@ public abstract class Unit implements UnitInterface {
     protected List<Unit> gang;
     protected Vector2 position;
 
-    public Unit(int attack, int protect, int[] damage, float health, int speed, boolean delivery, boolean magic, String name) {
+    public Unit(int attack, int protect, int shoot, int[] damage, float health, int speed, boolean delivery, boolean magic, String name) {
         this.attack = attack;
         this.protect = protect;
+        this.shoot = shoot;
         this.damage = damage;
         this.health = health;
         this.speed = speed;
@@ -41,6 +42,8 @@ public abstract class Unit implements UnitInterface {
     public float getHealth() {return health;}
 
     public String getName() {return name;}
+
+    public String getCharacter() {return name + " A:" + attack + ", P:" + protect + ", Dmg:" + Arrays.toString(damage) + ", HP:" + health + ", S:" + speed + ", D:" + delivery + ", M:" + magic;}
 
     @Override
     public String getInfo(){
