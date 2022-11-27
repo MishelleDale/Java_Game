@@ -1,56 +1,57 @@
+import charts.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
+
 
 public class Main{
-    private static final int GANG_SIZE = 5;
+    public static final int GANG_SIZE = 10;
+    public static List<Unit> whiteSide;
+    public static List<Unit> darkSide;
+
     public static void main(String[] args) {
-        List<Unit> whiteSide = new ArrayList<>();
-        List<Unit> darkSide = new ArrayList<>();
-        while (whiteSide.size() < GANG_SIZE) {
-            whiteSide.add(getUnit(0, whiteSide));
-            darkSide.add(getUnit(3, darkSide));
+        init();
+
+        Scanner scanner = new Scanner(System.in); 
+        
+        while (true) {
+            ConsoleView.view();
+
+            whiteSide.forEach(n -> n.step(darkSide));
+            darkSide.forEach(n -> n.step(whiteSide));
+
+            scanner.nextLine();
             
         }
-
-        whiteSide.forEach(unit -> System.out.println(unit.getInfo()));
-        darkSide.forEach(unit -> System.out.println(unit.getInfo()));
-        System.out.println();
-        whiteSide.forEach(Unit::step);
-        darkSide.forEach(Unit::step);
-        System.out.println();
-        whiteSide.forEach(unit -> System.out.println(unit.getInfo()));
-        darkSide.forEach(unit -> System.out.println(unit.getInfo()));
-
-        
+      
     }
 
-    private static Unit getUnit(int origin, List<Unit> side) {
-        int num = new Random().nextInt(origin, origin +4);
-        switch (num) {
-            case 0:
-                return new Monk(side);
-            case 1:
-                return new Robber();
-            case 2:
-                return new Sniper();
-            case 3:
-                return new Peasant();
-            case 4:
-                return new Spearman();
-            case 5:
-                return new Wizard(side);
-            default:
-                return new Xbowman();
-        }
-    }
+    private static void init(){
+        whiteSide = new ArrayList<>();
+        darkSide = new ArrayList<>();
 
-    private static void getType(List<Unit> units, String type) {
-        for (Unit unit: units) {
-            if (unit.toString().split(" ")[0].equals(type)){
-                System.out.println(unit);
+        int x = 1;
+        int y = 1;
+        for (int i = 0; i < GANG_SIZE; i++) {
+            switch (new Random().nextInt(4)) {
+                case 0: whiteSide.add(new Peasant(whiteSide, x, y++));break;
+                case 1: whiteSide.add(new Robber(whiteSide, x, y++));break;
+                case 2: whiteSide.add(new Sniper(whiteSide, x, y++));break;
+                default: whiteSide.add(new Monk(whiteSide, x, y++));
             }
         }
 
+        x = GANG_SIZE;
+        y = 1;
+        for (int i = 0; i < GANG_SIZE; i++) {
+            switch (new Random().nextInt(4)){
+                case 0: darkSide.add(new Peasant(darkSide, x, y++)); break;
+                case 1: darkSide.add(new Spearman(darkSide, x, y++)); break;
+                case 2: darkSide.add(new Xbowman(darkSide, x, y++)); break;
+                default: darkSide.add(new Wizard(darkSide, x, y++));
+            }
+        }
     }
 }
