@@ -1,6 +1,8 @@
+import charts.Unit;
 import charts.Vector2;
 
 import java.util.Collections;
+import java.util.List;
 
 public class ConsoleView {
 
@@ -17,28 +19,36 @@ public class ConsoleView {
             System.out.println(AnsiColors.ANSI_RED+"Step №" + step +"."+AnsiColors.ANSI_RESET);
         }
         step++;
-
         System.out.println(ConsoleView.top10);
 
+        int step = 0;
         for (int i = 1; i <= Main.GANG_SIZE-1; i++) {
             for (int j = 1; j <= Main.GANG_SIZE; j++) {
                 System.out.print(getChar(new Vector2(j, i)));
             }
-            System.out.println("|");
+
+            System.out.print("|  " ); 
+            if (step < Main.GANG_SIZE-1) {
+                System.out.print(AnsiColors.ANSI_GREEN + Main.whiteSide.get(step).getCharacter() + "    ");
+                System.out.println(AnsiColors.ANSI_BLUE + Main.darkSide.get(step).getCharacter() + AnsiColors.ANSI_RESET);
+                step++;
+            }
+           
             System.out.println(ConsoleView.mid10);
         }
 
         for (int j = 1; j <= Main.GANG_SIZE; j++) {
             System.out.print(getChar(new Vector2(j, 10)));
         }
-        System.out.println("|");
+        System.out.println("|  " + AnsiColors.ANSI_GREEN + Main.whiteSide.get(step).getCharacter() + "    " + AnsiColors.ANSI_BLUE + Main.darkSide.get(step).getCharacter() + AnsiColors.ANSI_RESET);
+
 
         System.out.println(ConsoleView.bottom10);
         System.out.println("Press Enter.");
 
-    }
-    
+        System.out.println();
 
+    }
 
     public static String formatDiv(String str){
         return str.replace('a', '\u250c')
@@ -62,4 +72,10 @@ public class ConsoleView {
         }
         return str;
     }
+
+       private static String getCharacher(List<Unit> name){
+        return null;
+    }
+
+    
 }
