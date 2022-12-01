@@ -1,10 +1,7 @@
 package System;
-import Main;
 import java.util.Collections;
-import java.util.List;
 
-
-import charts.Unit;
+import myGame.Main;
 
 public class ConsoleView {
 
@@ -15,12 +12,12 @@ public class ConsoleView {
 
     public static void view() {
         if (step == 0) {
-            System.out.printf(AnsiColors.ANSI_RED + "%-50s", "Начало игры." + AnsiColors.ANSI_RESET);
+            System.out.printf(AnsiColors.ANSI_RED + "%-50s", "Game starts." + AnsiColors.ANSI_RESET);
         } else {
-            System.out.printf(AnsiColors.ANSI_RED + "%-50s", "Ход №" + step + "." + AnsiColors.ANSI_RESET);
+            System.out.printf(AnsiColors.ANSI_RED + "%-50s", "Step №" + step + "." + AnsiColors.ANSI_RESET);
         }
-        System.out.printf(AnsiColors.ANSI_BLUE + "%-75s", "Команда синих." + AnsiColors.ANSI_RESET);
-        System.out.println(AnsiColors.ANSI_GREEN + "Команда зеленых." + AnsiColors.ANSI_RESET);
+        System.out.printf(AnsiColors.ANSI_BLUE + "%-75s", "Blue Team." + AnsiColors.ANSI_RESET);
+        System.out.println(AnsiColors.ANSI_GREEN + "Green Team" + AnsiColors.ANSI_RESET);
         step++;
 
         System.out.println(ConsoleView.TOP10);
@@ -39,13 +36,13 @@ public class ConsoleView {
         System.out.print("|");
         System.out.println(getPrintSide(Main.getGangSize()));
         System.out.println(ConsoleView.BOTTOM10);
-        System.out.println("Нажмите Enter.");
+        System.out.println("Press Enter.");
     }
 
     private static String getPrintSide(int i) {
         String str = "";
-        str += String.format("\t\t\t" + "%-80s", AnsiColors.ANSI_BLUE + Main.getBlueSide().get(i - 1).getInfo() + AnsiColors.ANSI_RESET);
-        str += String.format(AnsiColors.ANSI_GREEN + Main.getGreenSide().get(i - 1).getInfo() + AnsiColors.ANSI_RESET);
+        str += String.format("\t" + "%-80s", AnsiColors.ANSI_BLUE + Main.getBlueSide().get(i - 1).getCharacter() + AnsiColors.ANSI_RESET);
+        str += String.format(AnsiColors.ANSI_GREEN + Main.getGreenSide().get(i - 1).getCharacter() + AnsiColors.ANSI_RESET);
         return str;
     }
 
