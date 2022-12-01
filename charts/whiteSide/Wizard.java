@@ -1,16 +1,20 @@
-package charts;
+package charts.whiteSide;
 import java.util.List;
 
-public class Monk extends Unit{
-    public Monk(List<Unit> gang, int x, int y) {
-        super(12, 7, 0, new int[] {-4, -4}, 30, 5, false, true, "Monk");
+import System.Vector2;
+import charts.Unit;
+
+public class Wizard extends Unit{
+
+    public Wizard(List<Unit> gang, int x, int y) {
+        super(17, 12, 0, new int[]{-5,-5}, 30, 9, false, true, "Wizard");
         super.gang = gang;
         super.position = new Vector2(x, y);
-        }
+    }
 
     @Override 
     public String getInfo() {
-        return "Monk " + super.getInfo();
+        return "Wizard " + super.getInfo();
     }
 
     // @Override
@@ -32,4 +36,5 @@ public class Monk extends Unit{
     //         }
     //     }
     // }   
+    
 }

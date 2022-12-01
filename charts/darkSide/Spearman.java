@@ -1,6 +1,9 @@
-package charts;
+package charts.darkSide;
 
 import java.util.List;
+
+import System.Vector2;
+import charts.Unit;
 
 public class Spearman extends Unit{
     public Spearman(List<Unit> gang, int x, int y) {

@@ -1,6 +1,9 @@
-package charts;
+package charts.darkSide;
 
 import java.util.List;
+
+import System.Vector2;
+import charts.Unit;
 
 public class Xbowman extends Unit{
     public Xbowman(List<Unit> gang, int x, int y) {

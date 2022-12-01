@@ -2,6 +2,8 @@ package charts;
 
 import java.util.List;
 
+import System.Vector2;
+
 public class Peasant extends Unit{
 
     public Peasant(List<Unit> gang, int x, int y) {

@@ -1,6 +1,9 @@
-package charts;
+package charts.whiteSide;
 
 import java.util.List;
+
+import System.Vector2;
+import charts.Unit;
 
 public class Sniper extends Unit{
 
