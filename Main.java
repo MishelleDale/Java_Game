@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import System.ConsoleView;
+
 
 public class Main{
     public static final int GANG_SIZE = 10;
