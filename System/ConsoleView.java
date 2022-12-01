@@ -8,76 +8,71 @@ import charts.Unit;
 
 public class ConsoleView {
 
-    
-    private static int step = 1;
-    private static final String top10 = formatDiv("a") + String.join("", Collections.nCopies(9, formatDiv("-b"))) + formatDiv("-c");
-    private static final String mid10 = formatDiv("d") + String.join("", Collections.nCopies(9, formatDiv("-e"))) + formatDiv("-f");
-    private static final String bottom10 = formatDiv("g") + String.join("", Collections.nCopies(9, formatDiv("-h"))) + formatDiv("-i");
+    private static final String TOP10 = formatDiv("a") + String.join("", Collections.nCopies(Main.getFieldWidth() - 1, formatDiv("-b"))) + formatDiv("-c");
+    private static final String MID10 = formatDiv("d") + String.join("", Collections.nCopies(Main.getFieldWidth() - 1, formatDiv("-e"))) + formatDiv("-f");
+    private static final String BOTTOM10 = formatDiv("g") + String.join("", Collections.nCopies(Main.getFieldWidth() - 1, formatDiv("-h"))) + formatDiv("-i");
+    private static int step = 0;
 
     public static void view() {
-        if (step ==1 ){
-            System.out.println(AnsiColors.ANSI_RED+"First step."+AnsiColors.ANSI_RESET);
+        if (step == 0) {
+            System.out.printf(AnsiColors.ANSI_RED + "%-50s", "Начало игры." + AnsiColors.ANSI_RESET);
         } else {
-            System.out.println(AnsiColors.ANSI_RED+"Step №" + step +"."+AnsiColors.ANSI_RESET);
+            System.out.printf(AnsiColors.ANSI_RED + "%-50s", "Ход №" + step + "." + AnsiColors.ANSI_RESET);
         }
+        System.out.printf(AnsiColors.ANSI_BLUE + "%-75s", "Команда синих." + AnsiColors.ANSI_RESET);
+        System.out.println(AnsiColors.ANSI_GREEN + "Команда зеленых." + AnsiColors.ANSI_RESET);
         step++;
-        System.out.println(ConsoleView.top10);
 
-        int step = 0;
-        for (int i = 1; i <= Main.GANG_SIZE-1; i++) {
-            for (int j = 1; j <= Main.GANG_SIZE; j++) {
+        System.out.println(ConsoleView.TOP10);
+        for (int i = 1; i <= Main.getGangSize() - 1; i++) {
+            for (int j = 1; j <= Main.getFieldWidth(); j++) {
                 System.out.print(getChar(new Vector2(j, i)));
             }
-
-            System.out.print("|  " ); 
-            if (step < Main.GANG_SIZE-1) {
-                System.out.print(AnsiColors.ANSI_GREEN + Main.whiteSide.get(step).getCharacter() + "    ");
-                System.out.println(AnsiColors.ANSI_BLUE + Main.darkSide.get(step).getCharacter() + AnsiColors.ANSI_RESET);
-                step++;
-            }
-           
-            System.out.println(ConsoleView.mid10);
+            System.out.print("|");
+            System.out.println(getPrintSide(i));
+            System.out.println(ConsoleView.MID10);
         }
 
-        for (int j = 1; j <= Main.GANG_SIZE; j++) {
-            System.out.print(getChar(new Vector2(j, 10)));
+        for (int j = 1; j <= Main.getFieldWidth(); j++) {
+            System.out.print(getChar(new Vector2(j, Main.getGangSize())));
         }
-        System.out.println("|  " + AnsiColors.ANSI_GREEN + Main.whiteSide.get(step).getCharacter() + "    " + AnsiColors.ANSI_BLUE + Main.darkSide.get(step).getCharacter() + AnsiColors.ANSI_RESET);
-
-
-        System.out.println(ConsoleView.bottom10);
-        System.out.println("Press Enter.");
-
-        System.out.println();
-
+        System.out.print("|");
+        System.out.println(getPrintSide(Main.getGangSize()));
+        System.out.println(ConsoleView.BOTTOM10);
+        System.out.println("Нажмите Enter.");
     }
 
-    public static String formatDiv(String str){
-        return str.replace('a', '\u250c')
-            .replace('b', '\u252c')
-            .replace('c', '\u2510')
-            .replace('d', '\u251c')
-            .replace('e', '\u253c')
-            .replace('f', '\u2524')
-            .replace('g', '\u2514')
-            .replace('h', '\u2534')
-            .replace('i', '\u2518')
-            .replace('-', '\u2500');       
-
-    }
-
-    private static String getChar(Vector2 position){
-        String str = "| ";
-        for (int i = 0; i < Main.GANG_SIZE; i++) {
-            if (Main.darkSide.get(i).getPosition().isEquals(position)) str = "|"+AnsiColors.ANSI_BLUE + Main.darkSide.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
-            if (Main.whiteSide.get(i).getPosition().isEquals(position)) str = "|" + AnsiColors.ANSI_GREEN + Main.whiteSide.get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
-        }
+    private static String getPrintSide(int i) {
+        String str = "";
+        str += String.format("\t\t\t" + "%-80s", AnsiColors.ANSI_BLUE + Main.getBlueSide().get(i - 1).getInfo() + AnsiColors.ANSI_RESET);
+        str += String.format(AnsiColors.ANSI_GREEN + Main.getGreenSide().get(i - 1).getInfo() + AnsiColors.ANSI_RESET);
         return str;
     }
 
-       private static String getCharacher(List<Unit> name){
-        return null;
+    private static String formatDiv(String str) {
+        return str.replace('a', '\u250c')
+                .replace('b', '\u252c')
+                .replace('c', '\u2510')
+                .replace('d', '\u251c')
+                .replace('e', '\u253c')
+                .replace('f', '\u2524')
+                .replace('g', '\u2514')
+                .replace('h', '\u2534')
+                .replace('i', '\u2518')
+                .replace('-', '\u2500');
     }
 
+    private static String getChar(Vector2 position) {
+        String str = "| ";
+        for (int i = 0; i < Main.getGangSize(); i++) {
+            if (Main.getBlueSide().get(i).getPosition().isEquals(position)) {
+                str = "|" + AnsiColors.ANSI_BLUE + Main.getBlueSide().get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+            }
+            if (Main.getGreenSide().get(i).getPosition().isEquals(position)) {
+                str = "|" + AnsiColors.ANSI_GREEN + Main.getGreenSide().get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+            }
+        }
+        return str;
+    }
     
 }
