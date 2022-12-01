@@ -5,10 +5,11 @@ import System.Vector2;
 import charts.Unit;
 
 public class Monk extends Unit{
-    public Monk(List<Unit> gang, int x, int y) {
+    public Monk(List<Unit> gang,  List<Unit> side, int x, int y) {
         super(12, 7, 0, new int[] {-4, -4}, 30, 5, false, true, "Monk");
         super.gang = gang;
         super.position = new Vector2(x, y);
+        super.side = side;
         }
 
     @Override 
