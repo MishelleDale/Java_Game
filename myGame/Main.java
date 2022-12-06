@@ -10,14 +10,13 @@ import charts.whiteSide.Sniper;
 import charts.whiteSide.Wizard;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
 
 public class Main{
-    private static final int GANG_SIZE = 10;
+    public static final int GANG_SIZE = 10;
     private static final int FIELD_WIDTH = 10;
     public static List<Unit> blueSide;
     public static List<Unit> greenSide;
@@ -39,14 +38,12 @@ public class Main{
         List<Unit> sortSide = new ArrayList<>();
         sortSide.addAll(blueSide);
         sortSide.addAll(greenSide);
-        sortSide.sort(new Comparator<Unit>() {
-            @Override
-            public int compare(Unit o1, Unit o2) {
-                int tmp = o2.getSpeed() - o1.getSpeed();
-                return tmp;
+        sortSide.sort((o1, o2) -> o2.getSpeed() - o1.getSpeed());
+        sortSide.forEach(unit -> {
+            if (!unit.getAction().equals("Dead")) {
+                unit.step();
             }
         });
-        sortSide.forEach(Unit::step);
     }
 
     private static void runGames() {
@@ -65,7 +62,7 @@ public class Main{
             }
         }
 
-        x = FIELD_WIDTH;
+        x = GANG_SIZE;
         y = 1;
         for (int i = 0; i < GANG_SIZE; i++) {
             switch (new Random().nextInt(4)) {
