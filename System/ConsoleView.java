@@ -63,10 +63,19 @@ public class ConsoleView {
         String str = "| ";
         for (int i = 0; i < Main.getGangSize(); i++) {
             if (Main.getBlueSide().get(i).getPosition().isEquals(position)) {
-                str = "|" + AnsiColors.ANSI_BLUE + Main.getBlueSide().get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+                if (Main.blueSide.get(i).getAction().equals("Dead")) {
+                    str = "|" + AnsiColors.ANSI_RED + Main.getBlueSide().get(i).getName().toUpperCase().charAt(0)+ AnsiColors.ANSI_RESET;
+                } else {
+                    str = "|" + AnsiColors.ANSI_BLUE + Main.getBlueSide().get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+                }
+                
             }
             if (Main.getGreenSide().get(i).getPosition().isEquals(position)) {
-                str = "|" + AnsiColors.ANSI_GREEN + Main.getGreenSide().get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+                if (Main.greenSide.get(i).getAction().equals("Dead")) {
+                    str = "|" + AnsiColors.ANSI_RED + Main.getBlueSide().get(i).getName().toUpperCase().charAt(0)+ AnsiColors.ANSI_RESET;
+                } else {
+                    str = "|" + AnsiColors.ANSI_GREEN + Main.getBlueSide().get(i).getName().toUpperCase().charAt(0) + AnsiColors.ANSI_RESET;
+                }
             }
         }
         return str;
