@@ -1,7 +1,7 @@
 package charts.whiteSide;
 
 import java.util.List;
-
+import java.util.Random;
 import System.Vector2;
 import charts.Unit;
 
@@ -12,6 +12,7 @@ public class Sniper extends Unit{
         super.gang = gang;
         super.position = new Vector2(x, y);
         super.side = side;
+        quantity = new Random().nextInt(2,4);
     }
 
     @Override
