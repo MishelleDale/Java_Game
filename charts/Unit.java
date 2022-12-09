@@ -21,7 +21,7 @@ public abstract class Unit implements UnitInterface {
     private int playerID;
     protected List<Unit> gang, side;
     protected Vector2 position;
-    protected int quantity;
+    public int quantity;
 
     public Unit(int attack, int protect, int shoot, int[] damage, double health, int speed, boolean delivery, boolean magic, String name) {
         this.attack = attack;
@@ -29,6 +29,7 @@ public abstract class Unit implements UnitInterface {
         this.shoot = shoot;
         this.damage = damage;
         this.maxHealth = health;
+        this.health = health;
         this.speed = speed;
         this.delivery = delivery;
         this.magic = magic;
