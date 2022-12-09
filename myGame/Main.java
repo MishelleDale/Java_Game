@@ -30,7 +30,8 @@ public class Main{
             ConsoleView.view();
             turnMove();
             scanner.nextLine();
-            
+            System.out.println(blueSide.size());
+            System.out.println(greenSide.size());
         }
       
     }
